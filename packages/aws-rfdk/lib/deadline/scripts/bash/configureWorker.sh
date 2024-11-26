@@ -41,7 +41,7 @@ if [ ! -f "$DEADLINE_COMMAND" ]; then
 fi
 
 isVersionLessThan() {
-    python -c "import sys;sys.exit(0 if tuple(map(int, sys.argv[-2].split('.'))) < tuple(map(int, sys.argv[-1].split('.'))) else 1)" "$1" "$2"
+    python3 -c "import sys;sys.exit(0 if tuple(map(int, sys.argv[-2].split('.'))) < tuple(map(int, sys.argv[-1].split('.'))) else 1)" "$1" "$2"
 }
 
 DEADLINE_VERSION=$("$DEADLINE_COMMAND" -Version | grep -oP '[v]\K\d+\.\d+\.\d+\.\d+\b')
@@ -125,7 +125,16 @@ for worker_name in "${WORKER_NAMES[@]}"; do
 done
 
 # Restart service, if it exists, else restart application
+has_launcher_service=false
 if service --status-all | grep -q 'Deadline 10 Launcher'; then
+  has_launcher_service=true
+elif command -v systemctl; then
+  if systemctl list-unit-files deadline10launcher.service; then
+    has_launcher_service=true
+  fi
+fi
+
+if [ "$has_launcher_service" = "true" ]; then
   service deadline10launcher stop
   sudo killall -w deadlineworker || true
   service deadline10launcher start

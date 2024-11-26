@@ -54,6 +54,7 @@ export LINUX_DEADLINE_AMI_ID
 export WINDOWS_DEADLINE_AMI_ID
 
 # Configure test suites to include in end-to-end test
+#   - To skip a test, set it to true
 export SKIP_deadline_01_repository_TEST
 export SKIP_deadline_02_renderQueue_TEST
 export SKIP_deadline_03_workerFleetHttp_TEST

@@ -46,7 +46,7 @@ describe('CloudWatchAgent', () => {
     const host = new Instance(stack, 'Instance', {
       instanceType: InstanceType.of(InstanceClass.T2, InstanceSize.LARGE),
       machineImage: new AmazonLinuxImage({
-        generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+        generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       }),
       vpc,
     });
@@ -69,7 +69,7 @@ describe('CloudWatchAgent', () => {
     const host = new Instance(stack, 'Instance', {
       instanceType: InstanceType.of(InstanceClass.T2, InstanceSize.LARGE),
       machineImage: new AmazonLinuxImage({
-        generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+        generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       }),
       vpc,
     });
@@ -216,7 +216,7 @@ describe('CloudWatchAgent', () => {
     const host = new Instance(stack, 'Instance', {
       instanceType: InstanceType.of(InstanceClass.T2, InstanceSize.LARGE),
       machineImage: new AmazonLinuxImage({
-        generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+        generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       }),
       vpc,
     });

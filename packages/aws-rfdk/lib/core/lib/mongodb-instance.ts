@@ -585,6 +585,8 @@ export class MongoDbInstance extends Construct implements IMongoDb, IGrantable {
       'sudo chmod 750 /etc/mongod_certs/', // Directory needs to be executable.
       // mongod user id might, potentially change on reboot. Make sure we own all mongo data
       `sudo chown mongod.mongod -R ${MongoDbInstance.MONGO_DEVICE_MOUNT_POINT}`,
+      // We need yaml for some of our MongoDB configuration scripts
+      'sudo yum install -y python3-PyYAML',
       // Configure mongod
       'bash ./setMongoLimits.sh',
       `bash ./setStoragePath.sh "${MongoDbInstance.MONGO_DEVICE_MOUNT_POINT}"`,

@@ -30,7 +30,13 @@ else
   # Non-TLS connections can connect to the repository directly
   sudo $DEADLINE/deadlinecommand SetIniFileSetting ProxyUseSSL False
   sudo $DEADLINE/deadlinecommand SetIniFileSetting ProxySSLCA ""
-  sudo $DEADLINE/deadlinecommand ChangeRepository Remote $ENDPOINT >/dev/null
+  ALL_USERS_OPTION=
+  if $DEADLINE/deadlinecommand --help | grep "^ChangeRepository " | grep -q "<Save For All Users>"; then
+    # Deadline 10.4 added an option to "Save For All Users".
+    # This is the default behavior in prior versions.
+    ALL_USERS_OPTION="True"
+  fi
+  sudo $DEADLINE/deadlinecommand ChangeRepository Remote $ENDPOINT '' '' $ALL_USERS_OPTION >/dev/null
 fi
 
 exit 0

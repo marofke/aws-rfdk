@@ -6,7 +6,7 @@
 // ConfigureCloudWatchAgent.sh
 export const CWA_ASSET_LINUX = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: 'f3261b0f6923b012a8fce5cd6984211bc48b9977844b3fa44229234dc6f21d43',
+  Key: 'a1eed7232f6afcc474e870e7c3c01b7f4aec028de3a20eccc76ad9050032eecb',
 };
 
 // ConfigureCloudWatchAgent.ps1
@@ -38,5 +38,5 @@ export const INSTALL_MONGODB_3_6_SCRIPT_LINUX = {
 
 export const MONGODB_3_6_CONFIGURATION_SCRIPTS = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '433ead41839a7d4dad68bf0149f907050caa6d95bb7b5b180e5ff21a5dad3c19',
+  Key: '3b571d3659f9f47af6005ca9619c6aec2a576cea5a53b8707544df0a80e368c8',
 };

@@ -8,7 +8,7 @@
 
 set -xeufo pipefail
 
-cat /etc/mongod.conf | python ./setupMongodLiveConfig.py > ./mongod.conf.new
+cat /etc/mongod.conf | python3 ./setupMongodLiveConfig.py > ./mongod.conf.new
 sudo mv ./mongod.conf.new /etc/mongod.conf
 # Make sure mongod user can read the config file
 sudo chmod 640 /etc/mongod.conf

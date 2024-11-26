@@ -210,7 +210,7 @@ class DocDBDatabaseConnection extends DatabaseConnection {
     }
     host.userData.addCommands(
       'configure_database_installation_args(){',
-      'getJsonVal(){ python -c \'import json,sys;obj=json.load(sys.stdin);print obj["\'$1\'"]\'; }',
+      'getJsonVal(){ python3 -c \'import json,sys;obj=json.load(sys.stdin);print(obj["\'$1\'"])\'; }',
       'SET_X_IS_SET=$-',
       '{ set +x; } 2>/dev/null',
       `export SECRET_STRING=\`aws secretsmanager get-secret-value --secret-id ${this.props.login.secretArn} --region ${Stack.of(this.props.login).region} | getJsonVal 'SecretString'\``,
@@ -236,7 +236,7 @@ class DocDBDatabaseConnection extends DatabaseConnection {
     }
     host.userData.addCommands(
       'configure_deadline_database(){',
-      'getJsonVal(){ python -c \'import json,sys;obj=json.load(sys.stdin);print obj["\'$1\'"]\'; }',
+      'getJsonVal(){ python3 -c \'import json,sys;obj=json.load(sys.stdin);print(obj["\'$1\'"])\'; }',
       'SET_X_IS_SET=$-',
       '{ set +x; } 2>/dev/null',
       `export SECRET_STRING=\`aws secretsmanager get-secret-value --secret-id ${this.props.login.secretArn} --region ${Stack.of(this.props.login).region} | getJsonVal 'SecretString'\``,
@@ -390,7 +390,7 @@ class MongoDbInstanceDatabaseConnection extends DatabaseConnection {
     const certPwSecret = this.props.clientCertificate.passphrase;
     host.userData.addCommands(
       'configure_database_installation_args(){',
-      'getJsonVal(){ python -c \'import json,sys;obj=json.load(sys.stdin);print obj["\'$1\'"]\'; }',
+      'getJsonVal(){ python3 -c \'import json,sys;obj=json.load(sys.stdin);print(obj["\'$1\'"])\'; }',
       // Suppress -x, so no secrets go to the logs
       'SET_X_IS_SET=$-',
       '{ set +x; } 2>/dev/null',
@@ -417,7 +417,7 @@ class MongoDbInstanceDatabaseConnection extends DatabaseConnection {
     const certPwSecret = this.props.clientCertificate.passphrase;
     host.userData.addCommands(
       'configure_deadline_database(){',
-      'getJsonVal(){ python -c \'import json,sys;obj=json.load(sys.stdin);print obj["\'$1\'"]\'; }',
+      'getJsonVal(){ python3 -c \'import json,sys;obj=json.load(sys.stdin);print(obj["\'$1\'"])\'; }',
       'SET_X_IS_SET=$-',
       '{ set +x; } 2>/dev/null',
       `export DB_CERT_FILE="${MongoDbInstanceDatabaseConnection.DB_CERT_LOCATION}"`,

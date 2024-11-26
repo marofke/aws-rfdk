@@ -15,8 +15,8 @@ const bastionRegex = /bastionId/;
 const rqRegex = /renderQueueEndpointWF(\d)/;
 
 const testCases: Array<Array<any>> = [
-  [ 'Linux Worker HTTP mode', 1 ],
-  [ 'Windows Worker HTTP mode', 2 ],
+  [ 'Linux Worker HTTP mode', 1, 'Linux' ],
+  [ 'Windows Worker HTTP mode', 2, 'Windows' ],
 ];
 let bastionId: any;
 let renderQueueEndpoints: Array<string> = [];
@@ -45,7 +45,7 @@ beforeAll( async () => {
   });
 });
 
-describe.each(testCases)('Deadline WorkerFleet tests (%s)', (_, id) => {
+describe.each(testCases)('Deadline WorkerFleet tests (%s)', (_, id, workerOS) => {
   describe('Worker node tests', () => {
 
     // Before testing the render queue, send a command to configure the Deadline client to use that endpoint
@@ -139,7 +139,7 @@ describe.each(testCases)('Deadline WorkerFleet tests (%s)', (_, id) => {
             'sudo -i',
             'su - ec2-user >/dev/null',
             'cd ~ec2-user',
-            `./testScripts/WF-submit-jobs-to-sets.sh "${name}" "${arg}"`,
+            `./testScripts/WF-submit-jobs-to-sets.sh "${workerOS}" "${name}" "${arg}"`,
           ],
         },
       };

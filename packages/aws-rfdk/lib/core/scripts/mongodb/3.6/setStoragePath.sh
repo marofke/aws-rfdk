@@ -16,7 +16,7 @@ fi
 
 STORAGE_PATH=$1
 
-cat /etc/mongod.conf | python ./setupMongodStorage.py "${STORAGE_PATH}" > ./mongod.conf.new
+cat /etc/mongod.conf | python3 ./setupMongodStorage.py "${STORAGE_PATH}" > ./mongod.conf.new
 sudo mv ./mongod.conf.new /etc/mongod.conf
 # Make sure mongod user can read the config file
 sudo chmod 640 /etc/mongod.conf

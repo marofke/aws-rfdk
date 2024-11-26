@@ -732,7 +732,7 @@ export class Repository extends Construct implements IRepository {
     this.installerGroup = new AutoScalingGroup(this, 'Installer', {
       instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.LARGE),
       machineImage: new AmazonLinuxImage({
-        generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+        generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       }),
       vpc: props.vpc,
       vpcSubnets: props.vpcSubnets ?? {

@@ -59,7 +59,7 @@ describe('Test WorkerInstanceConfiguration for Linux', () => {
     instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
   });
 
@@ -468,7 +468,7 @@ describe('Test WorkerInstanceConfiguration connect to RenderQueue', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN

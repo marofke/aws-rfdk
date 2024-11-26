@@ -19,8 +19,8 @@ const rqRegex = /renderQueueEndpointWFS(\d)/;
 const certRegex = /CertSecretARNWFS(\d)/;
 
 const testCases: Array<Array<any>> = [
-  [ 'Linux Worker HTTPS (TLS) mode', 1 ],
-  [ 'Windows Worker HTTPS (TLS) mode', 2 ],
+  [ 'Linux Worker HTTPS (TLS) mode', 1, 'Linux' ],
+  [ 'Windows Worker HTTPS (TLS) mode', 2, 'Windows' ],
 ];
 let bastionId: any;
 let renderQueueEndpoints: Array<string> = [];
@@ -54,7 +54,7 @@ beforeAll( async () => {
   });
 });
 
-describe.each(testCases)('Deadline WorkerFleetHttps tests (%s)', (_, id) => {
+describe.each(testCases)('Deadline WorkerFleetHttps tests (%s)', (_, id, workerOS) => {
 
   beforeAll( async () => {
     if(secretARNs[id]) {
@@ -191,7 +191,7 @@ describe.each(testCases)('Deadline WorkerFleetHttps tests (%s)', (_, id) => {
             'sudo -i',
             'su - ec2-user >/dev/null',
             'cd ~ec2-user',
-            `./testScripts/WFS-submit-jobs-to-sets.sh "${name}" "${arg}"`,
+            `./testScripts/WFS-submit-jobs-to-sets.sh "${workerOS}" "${name}" "${arg}"`,
           ],
         },
       };

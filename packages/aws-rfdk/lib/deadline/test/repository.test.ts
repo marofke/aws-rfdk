@@ -930,7 +930,7 @@ test('repository configure client instance', () => {
   const instance = new Instance(stack, 'Instance', {
     vpc,
     instanceType: new InstanceType('t3.small'),
-    machineImage: MachineImage.latestAmazonLinux2(),
+    machineImage: MachineImage.latestAmazonLinux2023(),
   });
   const instanceRole = (
     instance
@@ -989,12 +989,12 @@ test('configureClientInstance uses singleton for repo config script', () => {
   const instance1 = new Instance(stack, 'Instance1', {
     vpc,
     instanceType: new InstanceType('t3.small'),
-    machineImage: MachineImage.latestAmazonLinux2(),
+    machineImage: MachineImage.latestAmazonLinux2023(),
   });
   const instance2 = new Instance(stack, 'Instance2', {
     vpc,
     instanceType: new InstanceType('t3.small'),
-    machineImage: MachineImage.latestAmazonLinux2(),
+    machineImage: MachineImage.latestAmazonLinux2023(),
   });
 
   // WHEN

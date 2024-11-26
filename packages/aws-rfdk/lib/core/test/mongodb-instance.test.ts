@@ -454,6 +454,7 @@ describe('Test MongoDbInstance', () => {
               'sudo chmod 640 -R /etc/mongod_certs/\n' +
               'sudo chmod 750 /etc/mongod_certs/\n' +
               'sudo chown mongod.mongod -R /var/lib/mongo\n' +
+              'sudo yum install -y python3-PyYAML\n' +
               'bash ./setMongoLimits.sh\n' +
               'bash ./setStoragePath.sh "/var/lib/mongo"\n' +
               'bash ./setMongoNoAuth.sh\n' +

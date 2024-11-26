@@ -27,6 +27,7 @@ import {
   Compatibility,
   ContainerImage,
   Ec2Service,
+  EcsOptimizedImage,
   LogDriver,
   NetworkMode,
   PlacementConstraint,
@@ -541,6 +542,7 @@ export class UsageBasedLicensing extends Construct implements IGrantable {
       // so this security group will get applied there
       // @ts-ignore
       securityGroup: props.securityGroup,
+      machineImage: EcsOptimizedImage.amazonLinux2023(),
     });
 
     const taskDefinition = new TaskDefinition(this, 'TaskDefinition', {

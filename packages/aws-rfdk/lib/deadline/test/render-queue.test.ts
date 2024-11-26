@@ -209,7 +209,7 @@ describe('RenderQueue', () => {
           InstanceClass.R4,
           InstanceSize.LARGE,
         ),
-        machineImage: MachineImage.latestAmazonLinux2(),
+        machineImage: MachineImage.latestAmazonLinux2023(),
       });
 
       // WHEN
@@ -516,7 +516,7 @@ describe('RenderQueue', () => {
       // GIVEN
       const instance = new Instance(dependencyStack, 'BackendConnectionInstance', {
         instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.MICRO),
-        machineImage: MachineImage.latestAmazonLinux2(),
+        machineImage: MachineImage.latestAmazonLinux2023(),
         vpc,
       });
       const portNumber = 5555;
@@ -1209,7 +1209,7 @@ describe('RenderQueue', () => {
             InstanceClass.R4,
             InstanceSize.LARGE,
           ),
-          machineImage: MachineImage.latestAmazonLinux2(),
+          machineImage: MachineImage.latestAmazonLinux2023(),
         })];
         const role = new Role(stack, 'Role', {assumedBy: new AccountRootPrincipal()});
 
@@ -1249,7 +1249,7 @@ describe('RenderQueue', () => {
             InstanceClass.R4,
             InstanceSize.LARGE,
           ),
-          machineImage: MachineImage.latestAmazonLinux2(),
+          machineImage: MachineImage.latestAmazonLinux2023(),
         });
 
         renderQueue.configureClientInstance({
@@ -1416,7 +1416,7 @@ describe('RenderQueue', () => {
             InstanceClass.R4,
             InstanceSize.LARGE,
           ),
-          machineImage: MachineImage.latestAmazonLinux2(),
+          machineImage: MachineImage.latestAmazonLinux2023(),
         })];
         const role = new Role(stack, 'Role', {assumedBy: new AccountRootPrincipal()});
 
@@ -1450,7 +1450,7 @@ describe('RenderQueue', () => {
             InstanceClass.R4,
             InstanceSize.LARGE,
           ),
-          machineImage: MachineImage.latestAmazonLinux2(),
+          machineImage: MachineImage.latestAmazonLinux2023(),
         });
 
         renderQueue.configureClientInstance({

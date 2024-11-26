@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/env python3
 
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
@@ -98,7 +98,7 @@ def main():
   mongod_conf = yaml.load(sys.stdin)
   modify_security(mongod_conf)
   modify_net_options(mongod_conf)
-  print yaml.dump(mongod_conf, default_flow_style=False)
+  print(yaml.dump(mongod_conf, default_flow_style=False))
 
 if __name__ == '__main__':
   main()
