@@ -95,7 +95,8 @@ export class MongoDbConfigure extends SimpleCustomResource {
   protected installMongoDbDriver(): any {
     console.log('Installing latest MongoDB Driver for NodeJS from npmjs.org');
     // Both HOME and --prefix are needed here because /tmp is the only writable location
-    execSync('HOME=/tmp npm install mongodb@3 --production --no-package-lock --no-save --prefix /tmp');
+    // Note: driver version compatibility can be found here https://www.mongodb.com/docs/drivers/node/current/compatibility/
+    execSync('HOME=/tmp npm install mongodb@6 --production --no-package-lock --no-save --prefix /tmp');
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     return require('/tmp/node_modules/mongodb');
   }
@@ -122,7 +123,7 @@ export class MongoDbConfigure extends SimpleCustomResource {
       tlsInsecure: false, // Require server identity validation
       tlsCAFile: '/tmp/ca.crt',
       auth: {
-        user: credentials.username,
+        username: credentials.username,
         password: credentials.password,
       },
       useUnifiedTopology: true, // We error on connect if not passing this.

@@ -125,7 +125,7 @@ export class StorageStruct extends Construct {
         masterUser: {
           username: 'DocDBUser',
         },
-        engineVersion: '3.6.0',
+        engineVersion: '5.0.0',
         backup: {
           retention: Duration.days(15),
         },
@@ -182,7 +182,7 @@ export class StorageStruct extends Construct {
         },
         mongoDb: {
           userSsplAcceptance,
-          version: MongoDbVersion.COMMUNITY_3_6,
+          version: MongoDbVersion.COMMUNITY_8_0,
           dnsZone: new PrivateHostedZone(this, 'Zone', {
             zoneName: 'renderfarm.local',
             vpc,

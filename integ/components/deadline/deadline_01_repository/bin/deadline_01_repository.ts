@@ -57,9 +57,7 @@ new RepositoryTestingTier(app, 'RFDKInteg-DL-TestingTier' + integStackTag, {
   env,
   integStackTag,
   structs,
-  // Currently we test using MongoDB 3.6, which doesn't run on the
-  // Amazon Linux 2023 image that we use to test Deadline 10.4.0.
-  bastionMachineImageOverride: MachineImage.latestAmazonLinux2(),
+  bastionMachineImageOverride: MachineImage.latestAmazonLinux2023(),
 });
 
 // Adds IAM Policy to Instance and ASG Roles

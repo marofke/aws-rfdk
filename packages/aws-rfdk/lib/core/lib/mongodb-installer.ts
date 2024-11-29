@@ -26,10 +26,10 @@ import {
  */
 export enum MongoDbVersion {
   /**
-   * MongoDB 3.6 Community Edition.
-   * See: https://docs.mongodb.com/v3.6/introduction/
+   * MongoDB 8.0 Community Edition.
+   * See: https://www.mongodb.com/docs/v8.0/introduction/
    */
-  COMMUNITY_3_6 = '3.6',
+  COMMUNITY_8_0 = '8.0',
 }
 
 /**

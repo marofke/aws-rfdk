@@ -36,16 +36,16 @@ class AppConfig {
   /**
    * The version of Deadline to use on the render farm. Some examples of pinned version values are "10", "10.1", or
    * "10.1.16"
-   * @default 10.3.2 is used, to match the worker AMI ID provided below
+   * @default 10.4.0 is used, to match the worker AMI ID provided below
    */
-  public readonly deadlineVersion: string = '10.3.2';
+  public readonly deadlineVersion: string = '10.4.0';
 
   /**
-   * A map of regions to Deadline Client Linux AMIs. As an example, the Linux Deadline 10.3.2.1 AMI ID from us-west-2
+   * A map of regions to Deadline Client Linux AMIs. As an example, the Linux Deadline 10.4.0.10 AMI ID from us-west-2
    * is filled in. It can be used as-is, added to, or replaced. Ideally the version here should match the one in
    * package.json used for staging the render queue and usage based licensing recipes.
    */
-  public readonly deadlineClientLinuxAmiMap: Record<string, string> = {['us-west-2']: 'ami-0b2bbe30ea8642cdd'};
+  public readonly deadlineClientLinuxAmiMap: Record<string, string> = {['us-west-2']: 'ami-0927eddb98f8160b3'};
 
   /**
    * (Optional) The name of the EC2 keypair to associate with instances.

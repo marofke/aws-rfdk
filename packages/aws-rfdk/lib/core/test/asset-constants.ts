@@ -31,12 +31,12 @@ export const MOUNT_FSX_SCRIPT_LINUX = {
   Key: '9afc7cd192aacbc562e018fb8f9c3848df6a247d43d2486ee91c0ded179e2774',
 };
 
-export const INSTALL_MONGODB_3_6_SCRIPT_LINUX = {
+export const INSTALL_MONGODB_8_0_SCRIPT_LINUX = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '80faba664ebb899d63d89c8fcea1d867475d1ddd28159f418b42af81197849e1',
+  Key: '9a874a982214b9def58319059eb1f977840b7d0178a9563121c03b122e4d2acd',
 };
 
-export const MONGODB_3_6_CONFIGURATION_SCRIPTS = {
+export const MONGODB_8_0_CONFIGURATION_SCRIPTS = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '3b571d3659f9f47af6005ca9619c6aec2a576cea5a53b8707544df0a80e368c8',
+  Key: 'c1c40e6ac96769539de343b85ef12d12399dfedfdc4cb3129af6205d76953dfb',
 };

@@ -372,7 +372,7 @@ export interface RepositoryProps {
 
   /**
    * Specify the database where the deadline schema needs to be initialized.
-   * Note that Deadline supports only databases that are compatible with MongoDB 3.6.
+   * Note that Deadline supports only databases that are compatible with MongoDB 5.0 and greater.
    *
    * @default A Document DB Cluster will be created with a single db.r5.large instance.
    */

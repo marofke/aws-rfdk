@@ -15,4 +15,8 @@ fi
 # Packaging directory
 rm -rf ./dist
 
+# Integ test directory
+rm -rf "./integ/stage"
+rm -rf "./integ/.e2etemp"
+
 echo "Done"
