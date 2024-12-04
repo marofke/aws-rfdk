@@ -47,7 +47,7 @@ describe('MongoDbPostInstall', () => {
   beforeEach(() => {
     const hostname = 'mongodb';
     const zoneName = 'testZone.internal';
-    const version = MongoDbVersion.COMMUNITY_3_6;
+    const version = MongoDbVersion.COMMUNITY_8_0;
     const userSsplAcceptance = MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL;
 
     stack = new Stack();

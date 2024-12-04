@@ -420,7 +420,7 @@ export class MongoDbInstance extends Construct implements IMongoDb, IGrantable {
       vpc: props.vpc,
       vpcSubnets: { subnets: [ subnet ] },
       instanceType: props.instanceType ?? new InstanceType('r5.large'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
       blockDevices: [
         {
           deviceName: '/dev/xvda', // Root volume

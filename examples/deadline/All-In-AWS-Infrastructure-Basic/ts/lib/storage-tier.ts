@@ -428,7 +428,7 @@ export class StorageTierMongoDB extends StorageTier {
       instanceType: props.databaseInstanceType,
       mongoDb: {
         userSsplAcceptance: props.acceptSsplLicense,
-        version: MongoDbVersion.COMMUNITY_3_6,
+        version: MongoDbVersion.COMMUNITY_8_0,
         hostname: 'mongo',
         dnsZone: props.dnsZone,
         serverCertificate: serverCert,

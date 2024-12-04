@@ -45,7 +45,7 @@ import {
   X509CertificatePem,
 } from '../lib';
 import {
-  CWA_ASSET_LINUX, INSTALL_MONGODB_3_6_SCRIPT_LINUX, MONGODB_3_6_CONFIGURATION_SCRIPTS, MOUNT_EBS_SCRIPT_LINUX,
+  CWA_ASSET_LINUX, INSTALL_MONGODB_8_0_SCRIPT_LINUX, MONGODB_8_0_CONFIGURATION_SCRIPTS, MOUNT_EBS_SCRIPT_LINUX,
 } from './asset-constants';
 import {
   testConstructTags,
@@ -61,7 +61,7 @@ describe('Test MongoDbInstance', () => {
 
   const hostname = 'hostname';
   const zoneName = 'testZone';
-  const version = MongoDbVersion.COMMUNITY_3_6;
+  const version = MongoDbVersion.COMMUNITY_8_0;
   const userSsplAcceptance = MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL;
 
   beforeEach(() => {
@@ -397,20 +397,20 @@ describe('Test MongoDbInstance', () => {
               'popd\n' +
               `rm -f /tmp/${MOUNT_EBS_SCRIPT_LINUX.Key}.zip\n` +
               // Install MongoDB
-              `mkdir -p $(dirname '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh')\n` +
+              `mkdir -p $(dirname '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh')\n` +
               'aws s3 cp \'s3://',
               {
-                'Fn::Sub': INSTALL_MONGODB_3_6_SCRIPT_LINUX.Bucket,
+                'Fn::Sub': INSTALL_MONGODB_8_0_SCRIPT_LINUX.Bucket,
               },
-              `/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh'\n` +
-              `bash /tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh\n` +
+              `/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh'\n` +
+              `bash /tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh\n` +
               // Fetching the MongoDB configuration scripts
-              `mkdir -p $(dirname '/tmp/${MONGODB_3_6_CONFIGURATION_SCRIPTS.Key}.zip')\n` +
+              `mkdir -p $(dirname '/tmp/${MONGODB_8_0_CONFIGURATION_SCRIPTS.Key}.zip')\n` +
               'aws s3 cp \'s3://',
               {
-                'Fn::Sub': MONGODB_3_6_CONFIGURATION_SCRIPTS.Bucket,
+                'Fn::Sub': MONGODB_8_0_CONFIGURATION_SCRIPTS.Bucket,
               },
-              `/${MONGODB_3_6_CONFIGURATION_SCRIPTS.Key}.zip' '/tmp/${MONGODB_3_6_CONFIGURATION_SCRIPTS.Key}.zip'\n` +
+              `/${MONGODB_8_0_CONFIGURATION_SCRIPTS.Key}.zip' '/tmp/${MONGODB_8_0_CONFIGURATION_SCRIPTS.Key}.zip'\n` +
               // Configure MongoDB
               'which mongod && test -f /etc/mongod.conf\n' +
               'sudo service mongod stop\n' +
@@ -418,7 +418,7 @@ describe('Test MongoDbInstance', () => {
               'mkdir -p "${MONGO_SETUP_DIR}"\n' +
               'sudo mount -t tmpfs -o size=50M tmpfs "${MONGO_SETUP_DIR}"\n' +
               'pushd "${MONGO_SETUP_DIR}"\n' +
-              `unzip /tmp/${MONGODB_3_6_CONFIGURATION_SCRIPTS.Key}.zip\n` +
+              `unzip /tmp/${MONGODB_8_0_CONFIGURATION_SCRIPTS.Key}.zip\n` +
               'cp /etc/mongod.conf .\n' +
               // Getting the server certificate
               'bash serverCertFromSecrets.sh \"',

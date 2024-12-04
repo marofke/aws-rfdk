@@ -18,6 +18,7 @@ const REGION_DENY_LIST = [
   'ap-south-2',
   'ap-southeast-3',
   'ap-southeast-4',
+  'ap-southeast-5',
   'ca-west-1',
   'eu-south-1',
   'eu-south-2',

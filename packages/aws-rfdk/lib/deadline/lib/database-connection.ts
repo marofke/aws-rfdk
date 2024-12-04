@@ -46,7 +46,7 @@ export interface DocDBConnectionOptions {
 
   /**
    * The Document DB Cluster this connection is for.
-   * Note: Deadline officially supports only databases that are compatible with MongoDB 3.6, 4.0, 5.0.
+   * Note: Deadline officially supports only databases that are compatible with MongoDB 5.0 and greater.
    */
   readonly database: IDatabaseCluster;
 
@@ -63,7 +63,7 @@ export interface DocDBConnectionOptions {
 export interface MongoDbInstanceConnectionOptions {
   /**
    * The MongoDB database to connect to.
-   * Note: Deadline officially supports only databases that are compatible with MongoDB 3.6, 4.0, 5.0.
+   * Note: Deadline officially supports only databases that are compatible with MongoDB 5.0 and higher.
    */
   readonly database: IMongoDb;
 
@@ -85,7 +85,7 @@ export interface MongoDbInstanceConnectionOptions {
 export abstract class DatabaseConnection {
   /**
    * Creates a DatabaseConnection which allows Deadline to connect to Amazon DocumentDB.
-   * Note: Deadline officially supports only databases that are compatible with MongoDB 3.6, 4.0, 5.0.
+   * Note: Deadline officially supports only databases that are compatible with MongoDB 5.0 and higher.
    *
    * Resources Deployed
    * ------------------------
@@ -97,7 +97,7 @@ export abstract class DatabaseConnection {
 
   /**
    * Creates a DatabaseConnection which allows Deadline to connect to MongoDB.
-   * Note: Deadline officially supports only databases that are compatible with MongoDB 3.6, 4.0, 5.0.
+   * Note: Deadline officially supports only databases that are compatible with MongoDB 5.0 and higher.
    *
    * Resources Deployed
    * ------------------------
@@ -326,7 +326,7 @@ class DocDBDatabaseConnection extends DatabaseConnection {
   }
 
   /**
-   * Deadline is compatible with MongoDB 3.6, 4.0 and 5.0. This function attempts to determine whether
+   * Deadline is compatible with MongoDB 5.0 and greater. This function attempts to determine whether
    * the given DocDB version is compatible.
    */
   protected isCompatibleDocDBVersion(): boolean {
