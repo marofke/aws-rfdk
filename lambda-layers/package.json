@@ -30,10 +30,10 @@
   "maturity": "stable",
   "devDependencies": {
     "@types/node": "18.11.19",
-    "typescript": "~5.1.6"
+    "typescript": "~5.4.5"
   },
   "dependencies": {
-    "@aws-sdk/client-lambda": "3.622.0",
-    "@aws-sdk/client-ssm": "3.622.0"
+    "@aws-sdk/client-lambda": "3.691.0",
+    "@aws-sdk/client-ssm": "3.698.0"
   }
 }

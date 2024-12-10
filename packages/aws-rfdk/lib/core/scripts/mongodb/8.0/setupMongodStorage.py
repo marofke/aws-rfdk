@@ -1,10 +1,11 @@
-#!/bin/env python
+#!/bin/env python3
 
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-# A simple script to disable authentication on the database. Also ensures that 
-# it is only accepting connections via localhost while authentication is disabled.
+# A simple script for setting the storage location of the MongoDB in /etc/mongod.conf
+# We use this script so that we preserve whatever options might already exist in the
+# existing mongod.conf file.
 
 # For reference, the default mongod.conf is:
 """
@@ -56,32 +57,29 @@ net:
 """
 
 import sys
+import os
 import yaml
 
-def modify_security(mongod_conf):
-  # Reference: https://docs.mongodb.com/v3.6/reference/configuration-options/#security-options
-  security_conf = mongod_conf.setdefault('security', {})
-  security_conf['authorization'] = 'disabled'
 
-def modify_network(mongod_conf):
-  # Reference: https://docs.mongodb.com/v3.6/reference/configuration-options/#net-options
-  net_conf = mongod_conf.setdefault('net', {})
-  net_conf['port'] = 27017
-  net_conf['bindIp'] = '127.0.0.1'
-  try:
-    del net_conf['bindIpAll']
-  except KeyError:
-    pass
-  try:
-    del net_conf['ssl']
-  except KeyError:
-    pass
+def modify_storage_path(mongod_conf, storage_path):
+    # Should never happen that this isn't set, but play it safe. Set to out-of-the-box default.
+    storage_conf = mongod_conf.setdefault('storage', {
+        'journal': {'enabled': 'true'}
+    })
+    storage_conf['dbPath'] = storage_path
+
 
 def main():
-  mongod_conf = yaml.load(sys.stdin)
-  modify_security(mongod_conf)
-  modify_network(mongod_conf)
-  print yaml.dump(mongod_conf, default_flow_style=False)
+    if len(sys.argv) < 2:
+        raise Exception("ERROR -- Require the storage path as an argument.")
+    storage_path = sys.argv[1]
+    if not os.path.isdir(storage_path):
+        raise Exception("ERROR -- {storage_path} is not a directory.".format(storage_path=storage_path))
+
+    mongod_conf = yaml.safe_load(sys.stdin)
+    modify_storage_path(mongod_conf, storage_path)
+    print(yaml.dump(mongod_conf, default_flow_style=False))
+
 
 if __name__ == '__main__':
-  main()
+    main()

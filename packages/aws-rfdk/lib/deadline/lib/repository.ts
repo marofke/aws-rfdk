@@ -372,7 +372,7 @@ export interface RepositoryProps {
 
   /**
    * Specify the database where the deadline schema needs to be initialized.
-   * Note that Deadline supports only databases that are compatible with MongoDB 3.6.
+   * Note that Deadline supports only databases that are compatible with MongoDB 5.0 and greater.
    *
    * @default A Document DB Cluster will be created with a single db.r5.large instance.
    */
@@ -678,7 +678,7 @@ export class Repository extends Construct implements IRepository {
        */
       const parameterGroup = databaseAuditLogging ? new ClusterParameterGroup(this, 'ParameterGroup', {
         description: 'DocDB cluster parameter group with enabled audit logs',
-        family: 'docdb3.6',
+        family: 'docdb5.0',
         parameters: {
           audit_logs: 'enabled',
         },
@@ -687,7 +687,7 @@ export class Repository extends Construct implements IRepository {
       const instances = props.documentDbInstanceCount ?? Repository.DEFAULT_NUM_DOCDB_INSTANCES;
       const dbCluster = new DatabaseCluster(this, 'DocumentDatabase', {
         masterUser: {username: 'DocDBUser'},
-        engineVersion: '3.6.0',
+        engineVersion: '5.0.0',
         instanceType: InstanceType.of(InstanceClass.R5, InstanceSize.LARGE),
         vpc: props.vpc,
         vpcSubnets: props.vpcSubnets ?? { subnetType: SubnetType.PRIVATE_WITH_EGRESS, onePerAz: true },
@@ -732,7 +732,7 @@ export class Repository extends Construct implements IRepository {
     this.installerGroup = new AutoScalingGroup(this, 'Installer', {
       instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.LARGE),
       machineImage: new AmazonLinuxImage({
-        generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+        generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       }),
       vpc: props.vpc,
       vpcSubnets: props.vpcSubnets ?? {

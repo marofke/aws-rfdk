@@ -172,7 +172,7 @@ export class DeploymentInstance extends Construct implements IScriptHost, IConne
     this.asg = new AutoScalingGroup(this, 'ASG', {
       instanceType: props.instanceType ?? InstanceType.of(InstanceClass.T3, InstanceSize.SMALL),
       keyName: props.keyName,
-      machineImage: props.machineImage ?? MachineImage.latestAmazonLinux2(),
+      machineImage: props.machineImage ?? MachineImage.latestAmazonLinux2023(),
       minCapacity: 1,
       maxCapacity: 1,
       securityGroup: props.securityGroup,

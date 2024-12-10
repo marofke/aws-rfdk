@@ -100,7 +100,7 @@ export class RepositoryTestingTier extends TestingTier {
       const userSsplAcceptance =
         userAcceptsSSPL.toString() === 'true' ? MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL : MongoDbSsplLicenseAcceptance.USER_REJECTS_SSPL;
       const mongodbInstaller = new MongoDbInstaller(this, {
-        version: MongoDbVersion.COMMUNITY_3_6,
+        version: MongoDbVersion.COMMUNITY_8_0,
         userSsplAcceptance,
       });
       mongodbInstaller.installOnLinuxInstance(this.testInstance.instance);

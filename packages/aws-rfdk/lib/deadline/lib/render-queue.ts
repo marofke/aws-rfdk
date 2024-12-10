@@ -31,6 +31,7 @@ import {
   Cluster,
   ContainerImage,
   Ec2TaskDefinition,
+  EcsOptimizedImage,
   LogDriver,
   PlacementConstraint,
   Scope,
@@ -452,6 +453,7 @@ export class RenderQueue extends RenderQueueBase implements IGrantable {
       // so this security group will get applied there
       // @ts-ignore
       securityGroup: props.securityGroups?.backend,
+      machineImage: EcsOptimizedImage.amazonLinux2023(),
     });
 
     this.backendConnections = this.asg.connections;

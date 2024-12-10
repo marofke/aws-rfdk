@@ -31,17 +31,25 @@ function install_agent {
   TMPDIR=$(mktemp -d)
   pushd $TMPDIR 2>&1 > /dev/null
 
+  # Set the gpg home directory, where it stores configuration files.
+  # By default, this is in the user's home directory. This might not exist, causing errors.
+  # We don't need these files after installation, so we use a temporary directory.
+  export GNUPGHOME=${TMPDIR}
+
   # Download CloudWatch agent installer
   aws s3api get-object --region $region --bucket amazoncloudwatch-agent-$region --key amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm amazon-cloudwatch-agent.rpm
 
   if [ "$SKIP_VERIFICATION" = false ]
   then
     aws s3api get-object --region $region --bucket amazoncloudwatch-agent-$region --key assets/amazon-cloudwatch-agent.gpg amazon-cloudwatch-agent.gpg
-    GPG_IMPORT_OUT=$(gpg --no-default-keyring --keyring ./keyring.gpg --import amazon-cloudwatch-agent.gpg 2>&1)
+    GPG_IMPORT_OUT=$(gpg --no-default-keyring --keyring ${TMPDIR}/keyring.gpg --import amazon-cloudwatch-agent.gpg 2>&1)
     GPG_KEY=$(echo "${GPG_IMPORT_OUT}" | grep -Eow 'key [0-9A-F]+' | awk '{print $2}')
-    GPG_FINGERPRINT_OUT=$(gpg --no-default-keyring --keyring ./keyring.gpg --fingerprint ${GPG_KEY} 2>&1)
-    GPG_FINGERPRINT=$(echo "${GPG_FINGERPRINT_OUT}" | tr -d '[:blank:]' | grep -Eo 'fingerprint=[0-9A-F]{40}')
-    if test "${GPG_FINGERPRINT}" != "fingerprint=937616F3450B7D806CBD9725D58167303B789C72"
+    GPG_FINGERPRINT_OUT=$(gpg --no-default-keyring --keyring ${TMPDIR}/keyring.gpg --fingerprint --with-colons ${GPG_KEY} 2>&1)
+    # The "--with-colons" above requests output in a machine-readable colon separated format.
+    # For a description of the format, see https://github.com/gpg/gnupg/blob/master/doc/DETAILS
+    # We're looking for the "fpr" or "Fingerprint" record, which has the fingerprint in field 10.
+    GPG_FINGERPRINT=$(echo "${GPG_FINGERPRINT_OUT}" | grep '^fpr:' | cut -d ':' -f10)
+    if test "${GPG_FINGERPRINT}" != "937616F3450B7D806CBD9725D58167303B789C72"
     then
         # Key failed to verify. Alert AWS!!
         echo "ERROR: Key failed to verify."
@@ -51,7 +59,7 @@ function install_agent {
     fi
 
     aws s3api get-object --region $region --bucket amazoncloudwatch-agent-$region --key amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm.sig amazon-cloudwatch-agent.rpm.sig
-    if ! gpg --no-default-keyring --keyring ./keyring.gpg --verify amazon-cloudwatch-agent.rpm.sig amazon-cloudwatch-agent.rpm 2>&1
+    if ! gpg --no-default-keyring --keyring ${TMPDIR}/keyring.gpg --verify amazon-cloudwatch-agent.rpm.sig amazon-cloudwatch-agent.rpm 2>&1
     then
         # CloudWatch agent installer failed to verify. Alert AWS!!
         echo "ERROR: Agent installer failed to verify"

@@ -39,7 +39,5 @@ else
 fi
 
 # Mongo command to query for "deadline10db" database.
-# We delete Timestamp fields from the EJSON result to avoid errors when parsing
-# them in Python.
-mongo --quiet --ssl --host="$DB_ADDRESS" --sslCAFile="$CERT_CA" --username="$DB_USERNAME" --password="$DB_PASS" --eval='(function(){var output=db.adminCommand({ listDatabases: 1, nameOnly: true, filter: { "name": "deadline10db" } } );delete output.onTime;delete output.operationTime;printjson(output)})()'
+mongosh --quiet --tls --host="$DB_ADDRESS" --tlsCAFile="$CERT_CA" --username="$DB_USERNAME" --password="$DB_PASS" --eval='EJSON.stringify( db.adminCommand({ listDatabases: 1, nameOnly: true, filter: { "name": "deadline10db" } }) );'
 exit 0

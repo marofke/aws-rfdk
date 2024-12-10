@@ -158,7 +158,7 @@ describe('DeploymentInstance', () => {
 
       test('uses latest Amazon Linux machine image', () => {
         // GIVEN
-        const amazonLinux = MachineImage.latestAmazonLinux2();
+        const amazonLinux = MachineImage.latestAmazonLinux2023();
         const imageId: { Ref: string } = stack.resolve(amazonLinux.getImage(stack)).imageId;
 
         // THEN

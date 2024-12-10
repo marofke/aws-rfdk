@@ -169,7 +169,7 @@ describe('mongoLogin', () => {
       tlsInsecure: false,
       tlsCAFile: '/tmp/ca.crt',
       auth: {
-        user: 'test',
+        username: 'test',
         password: 'pass',
       },
       useUnifiedTopology: true,

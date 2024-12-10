@@ -33,7 +33,7 @@ if [ ! -f "$DEADLINE_COMMAND" ]; then
 fi
 
 isVersionLessThan() {
-    python -c "import sys;sys.exit(0 if tuple(map(int, sys.argv[-2].split('.'))) < tuple(map(int, sys.argv[-1].split('.'))) else 1)" "$1" "$2"
+    python3 -c "import sys;sys.exit(0 if tuple(map(int, sys.argv[-2].split('.'))) < tuple(map(int, sys.argv[-1].split('.'))) else 1)" "$1" "$2"
 }
 
 DEADLINE_VERSION=$("$DEADLINE_COMMAND" -Version | grep -oP '[v]\K\d+\.\d+\.\d+\.\d+\b')

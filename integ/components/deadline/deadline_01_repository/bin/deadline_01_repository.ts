@@ -5,7 +5,11 @@
 
 import { App, Stack, Aspects } from 'aws-cdk-lib';
 import { AutoScalingGroupRequireImdsv2Aspect } from 'aws-cdk-lib/aws-autoscaling';
-import { InstanceRequireImdsv2Aspect, LaunchTemplateRequireImdsv2Aspect } from 'aws-cdk-lib/aws-ec2';
+import {
+  InstanceRequireImdsv2Aspect,
+  LaunchTemplateRequireImdsv2Aspect,
+  MachineImage,
+} from 'aws-cdk-lib/aws-ec2';
 import {
   Stage,
   ThinkboxDockerRecipes,
@@ -49,7 +53,12 @@ const structs: Array<StorageStruct> = [
   }),
 ];
 
-new RepositoryTestingTier(app, 'RFDKInteg-DL-TestingTier' + integStackTag, { env, integStackTag, structs });
+new RepositoryTestingTier(app, 'RFDKInteg-DL-TestingTier' + integStackTag, {
+  env,
+  integStackTag,
+  structs,
+  bastionMachineImageOverride: MachineImage.latestAmazonLinux2023(),
+});
 
 // Adds IAM Policy to Instance and ASG Roles
 Aspects.of(app).add(new SSMInstancePolicyAspect());

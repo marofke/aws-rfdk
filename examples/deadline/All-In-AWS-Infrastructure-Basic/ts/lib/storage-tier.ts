@@ -325,7 +325,7 @@ export class StorageTierDocDB extends StorageTier {
       masterUser: {
         username: 'adminuser',
       },
-      engineVersion: '3.6.0',
+      engineVersion: '5.0.0',
       backup: {
         // We recommend setting the retention of your backups to 15 days
         // for security reasons. The default retention is just one day.
@@ -428,7 +428,7 @@ export class StorageTierMongoDB extends StorageTier {
       instanceType: props.databaseInstanceType,
       mongoDb: {
         userSsplAcceptance: props.acceptSsplLicense,
-        version: MongoDbVersion.COMMUNITY_3_6,
+        version: MongoDbVersion.COMMUNITY_8_0,
         hostname: 'mongo',
         dnsZone: props.dnsZone,
         serverCertificate: serverCert,

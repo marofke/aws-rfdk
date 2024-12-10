@@ -6,7 +6,7 @@
 // ConfigureCloudWatchAgent.sh
 export const CWA_ASSET_LINUX = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: 'f3261b0f6923b012a8fce5cd6984211bc48b9977844b3fa44229234dc6f21d43',
+  Key: 'a1eed7232f6afcc474e870e7c3c01b7f4aec028de3a20eccc76ad9050032eecb',
 };
 
 // ConfigureCloudWatchAgent.ps1
@@ -31,12 +31,12 @@ export const MOUNT_FSX_SCRIPT_LINUX = {
   Key: '9afc7cd192aacbc562e018fb8f9c3848df6a247d43d2486ee91c0ded179e2774',
 };
 
-export const INSTALL_MONGODB_3_6_SCRIPT_LINUX = {
+export const INSTALL_MONGODB_8_0_SCRIPT_LINUX = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '80faba664ebb899d63d89c8fcea1d867475d1ddd28159f418b42af81197849e1',
+  Key: '9a874a982214b9def58319059eb1f977840b7d0178a9563121c03b122e4d2acd',
 };
 
-export const MONGODB_3_6_CONFIGURATION_SCRIPTS = {
+export const MONGODB_8_0_CONFIGURATION_SCRIPTS = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '433ead41839a7d4dad68bf0149f907050caa6d95bb7b5b180e5ff21a5dad3c19',
+  Key: 'c1c40e6ac96769539de343b85ef12d12399dfedfdc4cb3129af6205d76953dfb',
 };

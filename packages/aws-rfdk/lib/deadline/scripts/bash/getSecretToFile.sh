@@ -32,10 +32,10 @@ export SECRET_JSON=$(aws --region ${AWS_REGION} secretsmanager get-secret-value 
 set -x
 if printenv SECRET_JSON | grep 'SecretString' 2>&1 > /dev/null
 then
-    # Secret was plain test. Just copy the contents of the SecretString into the output file
-    printenv SECRET_JSON | python -c "${PY_SCRIPT}" SecretString > "${OUTPUT_FILENAME}"
+    # Secret was plain text. Just copy the contents of the SecretString into the output file
+    printenv SECRET_JSON | python3 -c "${PY_SCRIPT}" SecretString > "${OUTPUT_FILENAME}"
 else
     # Secret value is binary. The contents of SecretBinary will be the base64 encoding of the secret
-    printenv SECRET_JSON | python -c "${PY_SCRIPT}" SecretBinary | base64 -w0 -i -d > "${OUTPUT_FILENAME}"
+    printenv SECRET_JSON | python3 -c "${PY_SCRIPT}" SecretBinary | base64 -w0 -i -d > "${OUTPUT_FILENAME}"
 fi
 unset SECRET_JSON

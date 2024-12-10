@@ -1,6 +1,6 @@
 {
   "name": "pkglint",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
   "description": "Validate and fix package.json files",
   "main": "lib/index.js",
@@ -37,14 +37,14 @@
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
     "@types/glob": "^8.1.0",
-    "@types/jest": "^27.5.2",
+    "@types/jest": "^29.5.13",
     "@types/semver": "^7.5.0",
     "@types/yargs": "^17.0.24",
     "eslint": "^8.55.0",
     "eslint-import-resolver-node": "^0.3.9",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.28.0",
-    "eslint-plugin-jest": "^27.6.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.8.3",
     "typescript": "~5.1.6"
   },
   "nozem": {

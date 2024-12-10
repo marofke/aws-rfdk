@@ -90,7 +90,7 @@ describe('DocumentDB', () => {
       backup: {
         retention: Duration.days(15),
       },
-      engineVersion: '3.6.0',
+      engineVersion: '5.0.0',
     });
 
     if (!database.secret) {
@@ -128,7 +128,7 @@ describe('DocumentDB', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN
@@ -181,7 +181,7 @@ describe('DocumentDB', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN
@@ -213,7 +213,7 @@ describe('DocumentDB', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN
@@ -244,7 +244,7 @@ describe('DocumentDB', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN
@@ -371,7 +371,7 @@ describe('DocumentDB Version Checks', () => {
       backup: {
         retention: Duration.days(15),
       },
-      engineVersion: '3.6.0',
+      engineVersion: '5.0.0',
     });
 
     // WHEN
@@ -480,7 +480,7 @@ describe('MongoDB', () => {
       vpc,
       mongoDb: {
         userSsplAcceptance: MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL,
-        version: MongoDbVersion.COMMUNITY_3_6,
+        version: MongoDbVersion.COMMUNITY_8_0,
         hostname,
         dnsZone,
         serverCertificate: serverCert,
@@ -535,7 +535,7 @@ describe('MongoDB', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN
@@ -561,7 +561,7 @@ describe('MongoDB', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN
@@ -623,7 +623,7 @@ describe('MongoDB', () => {
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
 
     // WHEN
@@ -692,7 +692,7 @@ describe('MongoDB', () => {
       vpc,
       mongoDb: {
         userSsplAcceptance: MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL,
-        version: MongoDbVersion.COMMUNITY_3_6,
+        version: MongoDbVersion.COMMUNITY_8_0,
         hostname: 'mongo',
         dnsZone,
         serverCertificate: serverCert,

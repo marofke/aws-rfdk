@@ -38,5 +38,5 @@ echo '");' >> ./temp.js
 cat temp.js | tr -d '\n' > ./adminCredentials.js
 rm -f ./temp.js
 
-mongo --port 27017 --host localhost ./createAdminUser.js --quiet
+mongosh --port 27017 --host localhost ./createAdminUser.js --quiet
 rm -f ./adminCredentials.js

@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/aws/aws-rfdk/compare/v1.4.0...v1.5.0) (2024-12-05)
+
+
+### Supported CDK Version
+
+* [2.163.0](https://github.com/aws/aws-cdk/releases/tag/v2.163.0)
+
+
+### Officially Supported Deadline Versions
+
+* [10.1.9.2 to 10.4.0.10](https://docs.thinkboxsoftware.com/products/deadline/10.4/1_User%20Manual/manual/release-notes.html)
+
+
+### ⚠ BREAKING CHANGES
+
+In this release, we updated the default versions of DocumentDB and MongoDB. Make sure to backup your databases before updating to RFDK 1.5. See our documentation on [upgrading to RFDK 1.5](https://github.com/aws/aws-rfdk/blob/v1.5.0/packages/aws-rfdk/docs/upgrade/upgrading-1.5.md) for more information.
+
+We upgraded the default DocumentDB version to 5.0.0 ([#1364](https://github.com/aws/aws-rfdk/issues/1364)). Note that you may lose data and your deployment may fail if you have existing stacks with previous DocumentDB versions, so you must [manually upgrade DocumentDB first](https://github.com/aws/aws-rfdk/blob/v1.5.0/packages/aws-rfdk/docs/upgrade/upgrading-1.5.md#updating-documentdb).
+
+We upgraded the default MongoDB version to 8.0 ([#1392](https://github.com/aws/aws-rfdk/issues/1392)). Note that deployments with an existing MongoDB version lower than 8.0 will not automatically upgrade to the new version.
+
+### Features
+
+* **core:** Add support for Deadline 10.4.0 ([#1389](https://github.com/aws/aws-rfdk/issues/1389)) ([db0d582](https://github.com/aws/aws-rfdk/commit/db0d582106cab674dbeaa948315dbd6abeb74d84))
+* **deadline:** Allow passing Context to SEP config ([#1211](https://github.com/aws/aws-rfdk/issues/1211)) ([08b3672](https://github.com/aws/aws-rfdk/commit/08b3672750f344635456d65527c5a4e3972bf78e))
+* Upgrades MongoDB version to 8.0 ([#1392](https://github.com/aws/aws-rfdk/issues/1392)) ([88dbeb0](https://github.com/aws/aws-rfdk/commit/88dbeb0040f54ad86aa0b3f9493448d214a64479))
+* Upgrades DocumentDB version to 5.0.0 ([#1364](https://github.com/aws/aws-rfdk/issues/1364)) ([f0ca078](https://github.com/aws/aws-rfdk/commit/f0ca078996b5210690e7f776a5807aa08ed10c07))
+
+
+### Bug Fixes
+
+* Add Launch Config feature flag to unblock deployments in new accounts ([#1365](https://github.com/aws/aws-rfdk/issues/1365)) ([79490d9](https://github.com/aws/aws-rfdk/commit/79490d98d7ca36d5b3a28c220fff1375abcaadbd))
+
 ## [1.4.0](https://github.com/aws/aws-rfdk/compare/v1.3.0...v1.4.0) (2024-08-09)
 
 

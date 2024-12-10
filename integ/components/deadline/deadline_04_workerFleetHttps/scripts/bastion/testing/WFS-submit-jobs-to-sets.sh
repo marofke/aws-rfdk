@@ -6,6 +6,7 @@
 # Script to submit test Deadline jobs to be picked up by worker nodes based on their assigned group or pool
 #
 # Input:
+#   WORKER_OS: The operating system that the Worker node is running on. Will be either "Linux" or "Windows".
 #   JOB_NAME: Name for the test config/job submitted to Deadline. Will be either "group" or "pool"
 #   ARG: Command line arg added to `deadlinecommand` to submit the job to only the specific group/pool for the test case
 # Output:
@@ -13,12 +14,26 @@
 
 set -euo pipefail
 
-JOB_NAME=$1
-ARG=$2
+WORKER_OS=$1
+JOB_NAME=$2
+ARG=$3
 DEADLINE="/opt/Thinkbox/Deadline10/bin"
 
+case ${WORKER_OS^^} in
+  LINUX)
+    JOB_EXECUTABLE="/usr/bin/sleep"
+    ;;
+  WINDOWS)
+    JOB_EXECUTABLE="timeout.exe"
+    ;;
+  *)
+    echo "Error: unknown WORKER_OS from command line arguments: ${WORKER_OS}"
+    exit 1
+    ;;
+esac
+
 # Send a sleep command to the render queue; based on the arg passed in, this job will be assigned to the test group or pool
-JOB_ID=$($DEADLINE/deadlinecommand --prettyjson SubmitCommandLineJob -executable "/usr/bin/sleep" -arguments "10" -frames "1-10" -name $JOB_NAME $ARG)
+JOB_ID=$($DEADLINE/deadlinecommand --prettyjson SubmitCommandLineJob -executable "$JOB_EXECUTABLE" -arguments "10" -frames "1-10" -name $JOB_NAME $ARG)
 # We then pull the jobId from the output of `SubmitCommandLineJob`
 JOB_ID=$(jq -r '.result' <<< "$JOB_ID")
 

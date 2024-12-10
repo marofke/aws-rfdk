@@ -12,7 +12,7 @@ export const CONFIG_REPO_DIRECT_CONNECT_LINUX = {
 // configureWorker.sh
 export const CONFIG_WORKER_ASSET_LINUX = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '1cfdffe73bb016717ba1f43d64fe528af27b3784f524a97bb36533a6e6d057ff',
+  Key: '76766750db1ed4977df23b4ebb558126969a4ee7b29abb6f641bbf01e5d87ee2',
 };
 
 // configureWorker.ps1
@@ -24,7 +24,7 @@ export const CONFIG_WORKER_ASSET_WINDOWS = {
 // configureWorkerHealthCheck.sh
 export const CONFIG_WORKER_HEALTHCHECK_LINUX = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '3e16ffda458a50d2a032ef783202a85bf4677f19b92a38d3605d6cd750879f75',
+  Key: 'ead757e1f1f867645f8a576b3f882aa25c8c5412561d41b5276434f71b46062b',
 };
 
 // configureWorkerHealthCheck.ps1
@@ -47,7 +47,7 @@ export const CONFIG_WORKER_PORT_ASSET_WINDOWS = {
 // getSecretToFile.sh
 export const GET_SECRET_TO_FILE_SCRIPT_LINUX = {
   Bucket: 'cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}',
-  Key: '2245b375c979246094a6a47007b55e51f117e987be5de9791c0799cddc3f1c2e',
+  Key: '798b6fa13b77a35cae7f9eed2716de82efce89e61640d17dbd3c620f53613cec',
 };
 
 // installDeadlineRepository.sh

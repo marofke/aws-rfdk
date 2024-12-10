@@ -24,7 +24,7 @@ import {
   MongoDbVersion,
 } from '../lib';
 import {
-  INSTALL_MONGODB_3_6_SCRIPT_LINUX,
+  INSTALL_MONGODB_8_0_SCRIPT_LINUX,
 } from './asset-constants';
 
 
@@ -54,13 +54,13 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
     // Must throw when providing no SSPL option.
     expect(() => {
       new MongoDbInstaller(stack, {
-        version: MongoDbVersion.COMMUNITY_3_6,
+        version: MongoDbVersion.COMMUNITY_8_0,
       });
     }).toThrow(errorString);
     // Must throw when explicitly rejecting the SSPL.
     expect(() => {
       new MongoDbInstaller(stack, {
-        version: MongoDbVersion.COMMUNITY_3_6,
+        version: MongoDbVersion.COMMUNITY_8_0,
         userSsplAcceptance: MongoDbSsplLicenseAcceptance.USER_REJECTS_SSPL,
       });
     }).toThrow(errorString);
@@ -72,10 +72,10 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
     const installer = new MongoDbInstaller(stack, {
-      version: MongoDbVersion.COMMUNITY_3_6,
+      version: MongoDbVersion.COMMUNITY_8_0,
       userSsplAcceptance: MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL,
     });
 
@@ -104,7 +104,7 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
                     },
                     ':s3:::',
                     {
-                      'Fn::Sub': INSTALL_MONGODB_3_6_SCRIPT_LINUX.Bucket,
+                      'Fn::Sub': INSTALL_MONGODB_8_0_SCRIPT_LINUX.Bucket,
                     },
                   ],
                 ],
@@ -119,7 +119,7 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
                     },
                     ':s3:::',
                     {
-                      'Fn::Sub': INSTALL_MONGODB_3_6_SCRIPT_LINUX.Bucket,
+                      'Fn::Sub': INSTALL_MONGODB_8_0_SCRIPT_LINUX.Bucket,
                     },
                     '/*',
                   ],
@@ -137,11 +137,11 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
           'Fn::Join': [
             '',
             [
-              `#!/bin/bash\nmkdir -p $(dirname '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh')\naws s3 cp 's3://`,
+              `#!/bin/bash\nmkdir -p $(dirname '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh')\naws s3 cp 's3://`,
               {
-                'Fn::Sub': INSTALL_MONGODB_3_6_SCRIPT_LINUX.Bucket,
+                'Fn::Sub': INSTALL_MONGODB_8_0_SCRIPT_LINUX.Bucket,
               },
-              `/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh'\nbash /tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh`,
+              `/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh'\nbash /tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh`,
             ],
           ],
         },
@@ -157,7 +157,7 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
       machineImage: MachineImage.latestWindows(WindowsVersion.WINDOWS_SERVER_2019_ENGLISH_FULL_SQL_2017_STANDARD),
     });
     const installer = new MongoDbInstaller(stack, {
-      version: MongoDbVersion.COMMUNITY_3_6,
+      version: MongoDbVersion.COMMUNITY_8_0,
       userSsplAcceptance: MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL,
     });
 
@@ -172,14 +172,14 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
     const instance = new Instance(stack, 'Instance', {
       vpc,
       instanceType: new InstanceType('t3.small'),
-      machineImage: MachineImage.latestAmazonLinux2(),
+      machineImage: MachineImage.latestAmazonLinux2023(),
     });
     const installer1 = new MongoDbInstaller(stack, {
-      version: MongoDbVersion.COMMUNITY_3_6,
+      version: MongoDbVersion.COMMUNITY_8_0,
       userSsplAcceptance: MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL,
     });
     const installer2 = new MongoDbInstaller(stack, {
-      version: MongoDbVersion.COMMUNITY_3_6,
+      version: MongoDbVersion.COMMUNITY_8_0,
       userSsplAcceptance: MongoDbSsplLicenseAcceptance.USER_ACCEPTS_SSPL,
     });
 
@@ -195,15 +195,15 @@ Please set the userSsplAcceptance property to USER_ACCEPTS_SSPL to signify your 
           'Fn::Join': [
             '',
             Match.arrayWith([
-              `#!/bin/bash\nmkdir -p $(dirname '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh')\naws s3 cp 's3://`,
+              `#!/bin/bash\nmkdir -p $(dirname '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh')\naws s3 cp 's3://`,
               {
-                'Fn::Sub': INSTALL_MONGODB_3_6_SCRIPT_LINUX.Bucket,
+                'Fn::Sub': INSTALL_MONGODB_8_0_SCRIPT_LINUX.Bucket,
               },
-              `/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh'\nbash /tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh\nmkdir -p $(dirname '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh')\naws s3 cp 's3://`,
+              `/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh'\nbash /tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh\nmkdir -p $(dirname '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh')\naws s3 cp 's3://`,
               {
-                'Fn::Sub': INSTALL_MONGODB_3_6_SCRIPT_LINUX.Bucket,
+                'Fn::Sub': INSTALL_MONGODB_8_0_SCRIPT_LINUX.Bucket,
               },
-              `/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh'\nbash /tmp/${INSTALL_MONGODB_3_6_SCRIPT_LINUX.Key}.sh`,
+              `/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh' '/tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh'\nbash /tmp/${INSTALL_MONGODB_8_0_SCRIPT_LINUX.Key}.sh`,
             ]),
           ],
         },

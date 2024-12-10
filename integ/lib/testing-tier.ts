@@ -7,7 +7,9 @@ import * as path from 'path';
 import { CfnOutput, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import {
   BastionHostLinux,
+  IMachineImage,
   InstanceType,
+  MachineImage,
   Port,
   Vpc,
 } from 'aws-cdk-lib/aws-ec2';
@@ -16,7 +18,7 @@ import {
   SessionManagerHelper,
   X509CertificatePem,
 } from 'aws-rfdk';
-import { RenderQueue } from 'aws-rfdk/deadline';
+import { RenderQueue, Version } from 'aws-rfdk/deadline';
 import { Construct } from 'constructs';
 import { NetworkTier } from '../components/_infrastructure/lib/network-tier';
 import { IRenderFarmDb } from './storage-struct';
@@ -39,6 +41,12 @@ export interface TestingTierProps extends StackProps {
    * The unique suffix given to all stacks in the testing app
    */
   readonly integStackTag: string;
+
+  /**
+   * The machine image to use for the Bastion instance.
+   * Defaults to an image that's suitable for running Deadline.
+   */
+  readonly bastionMachineImageOverride?: IMachineImage;
 }
 
 /**
@@ -79,6 +87,7 @@ export abstract class TestingTier extends Stack {
       vpc: this.vpc,
       subnetSelection: { subnetGroupName: NetworkTier.subnetConfig.testRunner.name },
       instanceType: new InstanceType('t3.small'),
+      machineImage: props.bastionMachineImageOverride ?? this.getMachineImageForDeadlineVersion(this.deadlineVersion),
     });
     if (process.env.DEV_MODE?.toLowerCase() === 'true') {
       SessionManagerHelper.grantPermissionsTo(this.testInstance);
@@ -88,7 +97,6 @@ export abstract class TestingTier extends Stack {
     new CfnOutput(this, 'bastionId', {
       value: this.testInstance.instanceId,
     });
-
   }
 
   /**
@@ -179,7 +187,6 @@ export abstract class TestingTier extends Stack {
       'cd ~ec2-user',
       `cp ${installerPath} ./deadline-client-installer.run`,
       'chmod +x *.run',
-      'sudo yum install -y lsb',
       'sudo ./deadline-client-installer.run --mode unattended',
       `rm -f ${installerPath}`,
       'rm -f ./deadline-client-installer.run',
@@ -273,5 +280,18 @@ export abstract class TestingTier extends Stack {
 
     this.testInstance.instance.userData.addCommands( ...userDataCommands );
     this.testInstance.instance.userData.addSignalOnExitCommand( this.testInstance.instance );
+  }
+
+  /**
+   * Return an Amazon Linux machine image that can run the specified version of Deadline.
+   */
+  private getMachineImageForDeadlineVersion(deadlineVersion: string): IMachineImage {
+    const REMOVED_SUPPORT_FOR_AMAZON_LINUX_2 = new Version([10, 4, 0, 0]);
+
+    if (Version.parse(deadlineVersion).isLessThan(REMOVED_SUPPORT_FOR_AMAZON_LINUX_2)) {
+      return MachineImage.latestAmazonLinux2();
+    } else {
+      return MachineImage.latestAmazonLinux2023();
+    }
   }
 }
